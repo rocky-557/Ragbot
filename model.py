@@ -20,7 +20,7 @@ system_prompt = {
 # Initialize the chat history
 chat_history = [system_prompt]
 
-model='llama'
+model='llama-3.1-8b-instant'
 
 
 def gen_response(context='unavailable',query='introduce urself'):
