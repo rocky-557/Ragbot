@@ -1,0 +1,11 @@
+pypdf
+faiss-gpu
+langchain_community
+langchain_text_splitters 
+sentence_transformers
+transformers 
+torch
+groq
+streamlit
+streamlit_chat
+streamlit_extras
