@@ -1,6 +1,6 @@
 # RAG Implementation with LLaMA LLM Using Groq
 
-This project provides an implementation of a Retrieval-Augmented Generation (RAG) model using the LLaMA language model (LLM) and Groq. The RAG architecture combines dense retrieval with generative language modeling to create a powerful question-answering system. In this implementation, Groq accelerates the LLaMA LLM, enabling high-performance inference.
+This project provides an implementation of a Retrieval-Augmented Generation (RAG) model using the LLaMA language model (LLM) , FAISS vector db and Groq. The RAG architecture combines dense retrieval with generative language modeling to create a powerful question-answering system. In this implementation, Groq accelerates the LLaMA LLM, enabling high-performance inference.
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@ Retrieval-Augmented Generation (RAG) models use an external retriever to fetch r
 
 ## Features
 
-- **Dense Retrieval**: Uses a dense retriever for retrieving relevant documents from a knowledge base.
+- **FAISS Retrieval**: Uses a dense retriever for retrieving relevant documents from a knowledge base using FAISS .
 - **Groq Acceleration**: Accelerates inference using Groq for high-performance processing.
 - **Easy Configuration**: Simple setup and configuration for different datasets and use cases.
 - **Scalable**: Supports scaling across multiple Groq chips for larger workloads.
@@ -33,8 +33,8 @@ Before using this implementation, ensure you have the following:
 
 1. **Clone the Repository:**
     ```bash
-    git clone https://github.com/yourusername/rag-llama-groq.git
-    cd rag-llama-groq
+    git clone https://github.com/rocky-557/Studz-bot.git
+    cd Studz-bot
     ```
 
 2. **Install Dependencies:**
