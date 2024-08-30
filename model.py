@@ -14,13 +14,13 @@ Please Sign Up to Groq and replace the API key or put it in env variable "GROQ_A
 system_prompt = {
     "role": "system",
     "content": 
-    "You are an study assistant for students .You reply shortly , consisely ,no extra."
+    "You are an study assistant for students .You reply consisely , briefly .if needed explain . no extra."
 }
 
 # Initialize the chat history
 chat_history = [system_prompt]
 
-model='llama-3.1-8b-instant'
+model='llama3-70b-8192'
 
 
 def gen_response(context='unavailable',query='introduce urself'):
@@ -43,5 +43,5 @@ def gen_response(context='unavailable',query='introduce urself'):
   # return the response
   return response.choices[0].message.content
 
-print(gen_response())
+
 
