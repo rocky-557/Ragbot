@@ -1,8 +1,9 @@
-# RAG Implementation with LLaMA LLM 
+# RAG Implementation with LLaMA LLM , CLIP
 
 This project provides an implementation of a Retrieval-Augmented Generation (RAG) model using the LLaMA language model (LLM) , FAISS vector db and Groq. The RAG architecture combines dense retrieval with generative language modeling to create a powerful question-answering system. In this implementation, Groq accelerates the LLaMA LLM, enabling high-performance inference.
 
-### !!! Note : The given PDFS are not provided in here .  Kindly Download / add to the project folder and change the name respectively in the vec_db.py file. Also all the pdfs are not utilized till now . Only Vol-3 is used. With minor changes We can include all the PDFs . This is a Preventive Measure Taken to avoid too much Ahead Of Time (AOT) delay at the time of deployment. !!!
+### !!! Note : The given PDFS are not provided in here .  Kindly Download / add to the project folder and change the name respectively in the vec_db.py file. Also all the pdfs are not utilized till now . Only Vol-3 is used. With minor changes We can include all the PDFs . This is a Preventive Measure Taken to avoid too much Ahead Of Time (AOT) delay at the time of development. 
+### Kindly USE app2.py for testing . The Given Groq Api key is Still working , and will not be revoked until next Announcement.
 
 ## Table of Contents
 
@@ -22,6 +23,7 @@ Retrieval-Augmented Generation (RAG) models use an external retriever to fetch r
 - **Groq Acceleration**: Accelerates inference using Groq for high-performance processing.
 - **Easy Configuration**: Simple setup and configuration for different datasets and use cases.
 - **Scalable**: Supports scaling across multiple Groq LPU chips for larger workloads.
+- **CLIP**: Supports to retrieve text from images.
 
 ## Prerequisites
 
@@ -40,11 +42,12 @@ Before using this implementation, ensure you have the following:
     ```
 
 2. **Install Dependencies:**
+3. *The full list is not updated yet , because of the COLAB environment !!*
     ```bash
     pip install -r requirements.txt
     ```
 
-3. **Set Up Groq SDK:**
+4. **Set Up Groq SDK:**
     Follow the instructions from the [Groq SDK documentation](https://groq.com/docs/sdk) to set up the environment.
 
 
