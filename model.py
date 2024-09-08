@@ -6,10 +6,8 @@ from groq import Groq
 # Create the Groq client
 client = Groq(api_key='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', )
 
-'''# Kindly note this that the api key available wont work . 
-Please Sign Up to Groq and replace the API key or put it in env variable "GROQ_API_KEY"
 
-'''
+
 # Set the system prompt
 system_prompt = {
     "role": "system",
@@ -20,10 +18,10 @@ system_prompt = {
 # Initialize the chat history
 chat_history = [system_prompt]
 
-model='llama3-70b-8192'
+model='gemma-7b-it'
 
 
-def gen_response(context='unavailable',query='introduce urself'):
+def gen_response(context='unavailable',query='introduce urself',maxx=300):
   '''
   A Function for generating response from the required model using the context from RAG.
   '''
@@ -33,7 +31,7 @@ def gen_response(context='unavailable',query='introduce urself'):
 
   response = client.chat.completions.create(model=model,
                                             messages=chat_history,
-                                            max_tokens=300,
+                                            max_tokens=maxx,
                                             temperature=1.05)
   # Append the response to the chat history
   chat_history.append({

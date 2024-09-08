@@ -1,14 +1,16 @@
+#?///////////                  VEC_DB.PY                    ///////////?#.
+
 import langchain_community
 from langchain_community.vectorstores import FAISS
 from langchain_community.vectorstores.utils import DistanceStrategy
-from langchain.document_loaders import PyPDFLoader
-from langchain_text_splitters import RecursiveCharacterTextSplitter
 import sentence_transformers
 from langchain.embeddings import HuggingFaceEmbeddings
 from transformers import AutoTokenizer
+from langchain.schema import Document # Import the Document class
 
-
-
+text = ''
+with open('full.txt') as f:
+    text = f.read()
 
 class Encoder:
     def __init__(self, model_name: str = "sentence-transformers/all-MiniLM-L12-v2", device="cpu"):
@@ -17,21 +19,27 @@ class Encoder:
             model_name=model_name,
             model_kwargs={"device": device})
 
-def load_and_split_pdfs(chunk_size= 256):
-    pdf_path='vol_3.pdf'
-    loader = PyPDFLoader(pdf_path)
-    data = loader.load()
-    pages = data
+# Initialize the tokenizer
+tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/all-MiniLM-L12-v2")
 
+# Define the chunk size
+chunk_size = 256  # Example chunk size, adjust as needed
 
-    text_splitter = RecursiveCharacterTextSplitter.from_huggingface_tokenizer(
-        tokenizer=AutoTokenizer.from_pretrained("sentence-transformers/all-MiniLM-L12-v2"),
-        chunk_size=chunk_size,
-        chunk_overlap=int(chunk_size / 10),
-        strip_whitespace=True)
+def split_text_with_tokenizer(text, chunk_size=chunk_size, tokenizer=tokenizer):
+    # Tokenize the text
+    inputs = tokenizer(text, return_tensors="pt", truncation=False)
 
-    docs = text_splitter.split_documents(pages)
+    # Retrieve input IDs and chunk them
+    input_ids = inputs['input_ids'][0]
+    chunks = [input_ids[i:i + chunk_size] for i in range(0, len(input_ids), chunk_size)]
+
+    # Convert token IDs back to text
+    text_chunks = [tokenizer.decode(chunk, skip_special_tokens=True) for chunk in chunks]
+    
+    # Create Document objects from text chunks
+    docs = [Document(page_content=chunk) for chunk in text_chunks]
     return docs
+
 
 encoder = Encoder()
 
@@ -43,11 +51,11 @@ class FaissDb:
         self.db = FAISS.from_documents(docs, embedding_function, distance_strategy=DistanceStrategy.COSINE)
         vs=self.db
         vs.add_documents(docs)
-        vs.save_local('faiss_index')
+        vs.save_local('faiss')
         print('DB Saved Succesfully!')
 
     def retrieveDB(self,encoder):
-        self.db = FAISS.load_local('faiss_index', encoder.model,allow_dangerous_deserialization=True)
+        self.db = FAISS.load_local('faiss', encoder.model,allow_dangerous_deserialization=True)
         print('Loaded Sucessfully !')
 
 
@@ -61,5 +69,4 @@ class FaissDb:
         return context
         
 vecdb = FaissDb()
-vecdb.retrieveDB(encoder)
-vecdb.similarity_search(question='heart')
+vecdb.retrieveDB(encoder=encoder)

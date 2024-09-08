@@ -9,3 +9,4 @@ groq
 streamlit
 streamlit_chat
 streamlit_extras
+unstructured_ingest

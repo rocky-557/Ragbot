@@ -134,3 +134,5 @@ def get_imgs(query):
         imgs.append(extracted[i])
   return imgs
 
+
+
